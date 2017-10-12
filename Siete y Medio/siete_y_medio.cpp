@@ -18,6 +18,18 @@ using namespace std;
 
 // Stub for main
 int main() {
-	/* --STATEMENTS-- */
+	srand(time(0));
+	//Single Test
+	Card* c = new Card();
+	cout << c->get_english_rank() << " " << c->get_english_suit() << endl << c->get_rank() << endl << c->get_spanish_rank() << " " << c->get_spanish_suit() << endl;
+	//Multi Test
+	vector<Card*> hand;
+	hand.push_back(new Card());
+	hand.push_back(new Card());
+	hand.push_back(new Card());
+	for (auto x : hand) {
+		cout << x->get_english_rank() << " " << x->get_english_suit() << endl;
+	}
+	
 	return 0;
 }
