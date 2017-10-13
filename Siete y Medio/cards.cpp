@@ -182,7 +182,11 @@ bool Card::operator < (Card card2) const {
 	return rank < card2.rank;
 }
 
-
+void Card::print() const {
+	string spanishName = get_spanish_rank() + " de " + get_spanish_suit();
+	string englishName = "(" + get_english_rank() + " of " + get_english_suit() + ").";
+	cout << "        " << setw(29) << left << spanishName << englishName << endl;
+}
 
 /* *************************************************
 Hand class
@@ -196,12 +200,23 @@ void Hand::add(Card* c) {
 }
 
 //Prints out the cards in the hand vector.
-void const Hand::print() {
+void Hand::print() const {
 	for (auto c : hand) {
-		string spanishName = c->get_spanish_rank() + " de " + c->get_spanish_suit();
-		string englishName = "(" + c->get_english_rank() + " of " + c->get_english_suit() + ").";
-		cout << "        " << setw(29) << left << spanishName << englishName << endl;
+		c->print();
 	}
+}
+
+//Gets value of hand vector
+double Hand::getTotal() const {
+	double sum = 0;
+	for (auto c : hand) {
+		double rank = c->get_rank();
+		if (rank > 7) {
+			rank = .5;
+		}
+		sum += rank;
+	}
+	return sum;
 }
 
 
@@ -214,6 +229,10 @@ Player::Player(int m) {
 	money = m;
 }
 
-const int Player::getAmount() {
+int Player::getAmount() const{
 	return money;
+}
+
+void Player::add(int bet) {
+	money += bet;
 }

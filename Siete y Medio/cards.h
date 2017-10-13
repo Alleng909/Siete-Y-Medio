@@ -52,6 +52,9 @@ public:
 	// Useful if you want to sort the cards.
 	bool operator < (Card card2) const;
 
+	//Prints Card
+	void print() const;
+
 private:
 	suit_t suit;
 	rank_t rank;
@@ -65,7 +68,8 @@ public:
 
 	// You decide what functions you'll need...
 	void add(Card* c);
-	void const print();
+	void print() const;
+	double getTotal() const;
 
 private:
 	vector<Card*> hand;
@@ -80,7 +84,8 @@ public:
 
 	// You decide what functions you'll need...
 	//Returns the amount of money the player has.
-	const int getAmount();
+	int getAmount() const;
+	void add(int bet);
 private:
 	int money;
 	// You decide what extra fields (if any) you'll need...

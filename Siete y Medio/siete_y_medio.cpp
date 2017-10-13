@@ -12,10 +12,16 @@ const int startingAmount = 100;
 const int maxPayout = 900;
 
 // Non member functions declarations (if any)
-
+void deal(Hand* h);
 
 // Non member functions implementations (if any)
-
+void deal(Hand* h) {
+	Card* freshlyDealt = new Card();
+	cout << "New card:\n";
+	h->add(freshlyDealt);
+	freshlyDealt->print();
+	return;
+}
 
 // Stub for main
 int main() {
@@ -39,25 +45,37 @@ int main() {
 		Hand* pHand = new Hand();
 		Hand* dHand = new Hand();
 		pHand->add(new Card());
-		dHand->add(new Card());
 		cout << "Your cards:\n";
 		pHand->print();
-		dHand->print();
+		string cardRequest = "y";
+		while (cardRequest == "y") { //Player's turn
+			cout << "Your total is " << pHand->getTotal() << ". Do you want another card (y/n)? ";
+			cin >> cardRequest;
+			if (cardRequest == "y") {
+				deal(pHand);
+				cout << "\nYour cards:\n";
+				pHand->print();
+				if (pHand->getTotal() > 7.5) {
+					cout << "You busted with " << pHand->getTotal() << ".\nToo bad. You lose " << bet << ".\n";
+					p->add(-bet);
+					break;
+				}
+			}
+		}
+
+		if (pHand->getTotal() <= 7.5) { //Dealer's turn.
+			dHand->add(new Card());
+			cout << "Dealer's cards:\n";
+			dHand->print();
+			while (dHand->getTotal() < 5.5) {
+				cout << "The dealer's total is " << dHand->getTotal() << ".\n";
+				deal(dHand);
+				cout << "Dealer's cards:\n";
+				dHand->print();
+			}
+			cout << "The dealer's total is " << dHand->getTotal() << ".\n";
+		}
 	}
-
-
-
-	//Single Test
-	//Card* c = new Card();
-	//cout << c->get_english_rank() << " " << c->get_english_suit() << endl << c->get_rank() << endl << c->get_spanish_rank() << " " << c->get_spanish_suit() << endl;
-	//Multi Test
-	//vector<Card*> hand;
-	//hand.push_back(new Card());
-	//hand.push_back(new Card());
-	//hand.push_back(new Card());
-	//for (auto x : hand) {
-	//	cout << x->get_english_rank() << " " << x->get_english_suit() << endl;
-	//}
 	
 	return 0;
 }
