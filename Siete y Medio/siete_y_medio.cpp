@@ -61,6 +61,7 @@ int main() {
 				cout << "\nYour cards:\n";
 				pHand->print();
 				if (pHand->getTotal() > 7.5) {
+					cout << "Your total is " << pHand->getTotal() << ".\n";
 					break;
 				}
 			}
@@ -68,7 +69,7 @@ int main() {
 
 		//Dealer's turn.
 		dHand->add(new Card());
-		cout << "Dealer's cards:\n";
+		cout << "\nDealer's cards:\n";
 		dHand->print();
 		while (dHand->getTotal() < 5.5) {
 			cout << "The dealer's total is " << dHand->getTotal() << ".\n";
