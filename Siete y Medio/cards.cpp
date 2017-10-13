@@ -1,7 +1,7 @@
 #include "cards.h"
 #include <cstdlib>
 #include <iostream>
-
+#include <iomanip>
 /*
 You might or might not need these two extra libraries
 #include <iomanip>
@@ -188,8 +188,20 @@ bool Card::operator < (Card card2) const {
 Hand class
 ************************************************* */
 // Implemente the member functions of the Hand class here.
-Hand::Hand() {
+Hand::Hand() {}
 
+//Adds a card to the hand vector.
+void Hand::add(Card* c) {
+	hand.push_back(c);
+}
+
+//Prints out the cards in the hand vector.
+void const Hand::print() {
+	for (auto c : hand) {
+		string spanishName = c->get_spanish_rank() + " de " + c->get_spanish_suit();
+		string englishName = "(" + c->get_english_rank() + " of " + c->get_english_suit() + ").";
+		cout << "        " << setw(29) << left << spanishName << englishName << endl;
+	}
 }
 
 

@@ -24,6 +24,8 @@ int main() {
 
 
 	while (p->getAmount() > 0 && p->getAmount() < startingAmount + maxPayout) {//Game betting loop
+		
+		//Taking valid user input
 		cout << "You have $" << p->getAmount() << ". Enter bet: ";
 		int bet = maxPayout + startingAmount; //Too high to get without winning, triggering for loop. 
 		while (bet > p->getAmount() || bet <= 0) {
@@ -32,8 +34,15 @@ int main() {
 				cout << "\nYou have $" << p->getAmount() << " and that is an invalid amount, enter new bet: ";
 			}
 		}
-		std::cout << "\nA valid bet of " << bet << " has been placed.\n";
-
+		
+		//Playing cards.
+		Hand* pHand = new Hand();
+		Hand* dHand = new Hand();
+		pHand->add(new Card());
+		dHand->add(new Card());
+		cout << "Your cards:\n";
+		pHand->print();
+		dHand->print();
 	}
 
 

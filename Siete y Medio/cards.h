@@ -64,9 +64,11 @@ public:
 	Hand();
 
 	// You decide what functions you'll need...
+	void add(Card* c);
+	void const print();
 
 private:
-	vector<Card> hand;
+	vector<Card*> hand;
 };
 
 
