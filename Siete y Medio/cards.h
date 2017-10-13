@@ -70,6 +70,7 @@ public:
 	void add(Card* c);
 	void print() const;
 	double getTotal() const;
+	~Hand();
 
 private:
 	vector<Card*> hand;

@@ -219,6 +219,13 @@ double Hand::getTotal() const {
 	return sum;
 }
 
+//Destructor
+Hand::~Hand() {
+	for (auto c : hand) {
+		delete c;
+	}
+}
+
 
 /* *************************************************
 Player class
