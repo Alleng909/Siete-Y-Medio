@@ -66,7 +66,7 @@ public:
 	// You decide what functions you'll need...
 
 private:
-	// You decide what fields you'll need...
+	vector<Card> hand;
 };
 
 
@@ -77,7 +77,8 @@ public:
 	Player(int m);
 
 	// You decide what functions you'll need...
-
+	//Returns the amount of money the player has.
+	const int getAmount();
 private:
 	int money;
 	// You decide what extra fields (if any) you'll need...
