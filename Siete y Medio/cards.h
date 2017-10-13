@@ -54,6 +54,7 @@ public:
 
 	//Prints Card
 	void print() const;
+	void print(ofstream& o);
 
 private:
 	suit_t suit;
@@ -69,6 +70,7 @@ public:
 	// You decide what functions you'll need...
 	void add(Card* c);
 	void print() const;
+	void print(ofstream& o);
 	double getTotal() const;
 	~Hand();
 
