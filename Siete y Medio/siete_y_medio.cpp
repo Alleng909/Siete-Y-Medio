@@ -56,8 +56,6 @@ int main() {
 				cout << "\nYour cards:\n";
 				pHand->print();
 				if (pHand->getTotal() > 7.5) {
-					cout << "You busted with " << pHand->getTotal() << ".\nToo bad. You lose " << bet << ".\n";
-					p->add(-bet);
 					break;
 				}
 			}
@@ -75,6 +73,38 @@ int main() {
 			}
 			cout << "The dealer's total is " << dHand->getTotal() << ".\n";
 		}
+
+		//Comparison logic.
+		if (pHand->getTotal() > 7.5) {
+			cout << "\nYou busted with " << pHand->getTotal() << ".\nToo bad. You lose " << bet << ".\n";
+			p->add(-bet);
+		}
+		else if (dHand->getTotal() > 7.5) {
+			cout << "\nYou win " << bet << ".\n";
+			p->add(bet);
+		}
+		else if (dHand->getTotal() > pHand->getTotal()) {
+			cout << "\nToo bad. You lose " << bet << ".\n";
+			p->add(-bet);
+		}
+		else if (pHand->getTotal() > dHand->getTotal()) {
+			cout << "\nYou win " << bet << ".\n";
+			p->add(bet);
+		}
+		else {
+			cout << "\nNobody wins!\n";
+		}
+	}
+
+	//Ending line
+	if (p->getAmount() == 0) {
+		cout << "\nYou have $0. GAME OVER!\nCome back when you have more money.\n\nBye!\n";
+	}
+	else if (p->getAmount() >= startingAmount + maxPayout) {
+		cout << "\nCongratulations. You beat the casino with $" << p->getAmount() << ".\n\nNow shoo!\n";
+	}
+	else {
+		cout << "\nYou ended the game prematurely somehow? Congrats on getting this message, now what did you do?";
 	}
 	
 	return 0;
