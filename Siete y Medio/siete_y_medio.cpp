@@ -27,10 +27,12 @@ void deal(Hand* h) {
 int main() {
 	srand(time(0)); //Set a random seed for later card generation.
 	Player* p = new Player(startingAmount);
-
+	ofstream couf; //cout file
+	couf.open("gameLog.txt");
+	int gameNumber = 0;
 
 	while (p->getAmount() > 0 && p->getAmount() < startingAmount + maxPayout) {//Game betting loop
-		
+		++gameNumber;
 		//Taking valid user input
 		cout << "You have $" << p->getAmount() << ". Enter bet: ";
 		int bet = maxPayout + startingAmount; //Too high to get without winning, triggering for loop. 
@@ -61,18 +63,29 @@ int main() {
 			}
 		}
 
-		if (pHand->getTotal() <= 7.5) { //Dealer's turn.
-			dHand->add(new Card());
+		//Dealer's turn.
+		dHand->add(new Card());
+		cout << "Dealer's cards:\n";
+		dHand->print();
+		while (dHand->getTotal() < 5.5) {
+			cout << "The dealer's total is " << dHand->getTotal() << ".\n";
+			deal(dHand);
 			cout << "Dealer's cards:\n";
 			dHand->print();
-			while (dHand->getTotal() < 5.5) {
-				cout << "The dealer's total is " << dHand->getTotal() << ".\n";
-				deal(dHand);
-				cout << "Dealer's cards:\n";
-				dHand->print();
-			}
-			cout << "The dealer's total is " << dHand->getTotal() << ".\n";
 		}
+		cout << "The dealer's total is " << dHand->getTotal() << ".\n";
+		
+
+		//couf'ing up into a log
+		for (int i = 0; i < 47; i++) {
+			couf << "-";
+		}
+		couf << "\nGame number: " << gameNumber << "          Money left: $" << p->getAmount() << "\nBet: " << bet << "\n\nYour cards:\n";
+		pHand->print(couf);
+		couf << "Your total: " << pHand->getTotal() << ".\n\nDealer's cards:\n";
+		dHand->print(couf);
+		couf << "The dealer's total is " << dHand->getTotal() << ".\n";
+
 
 		//Comparison logic.
 		if (pHand->getTotal() > 7.5) {
@@ -106,6 +119,7 @@ int main() {
 	else {
 		cout << "\nYou ended the game prematurely somehow? Congrats on getting this message, now what did you do?";
 	}
-	
+
+
 	return 0;
 }

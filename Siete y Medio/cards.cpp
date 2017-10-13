@@ -188,6 +188,13 @@ void Card::print() const {
 	cout << "        " << setw(29) << left << spanishName << englishName << endl;
 }
 
+
+void Card::print(ofstream& o) {
+	string spanishName = get_spanish_rank() + " de " + get_spanish_suit();
+	string englishName = "(" + get_english_rank() + " of " + get_english_suit() + ").";
+	o << "        " << setw(29) << left << spanishName << englishName << endl;
+}
+
 /* *************************************************
 Hand class
 ************************************************* */
@@ -203,6 +210,13 @@ void Hand::add(Card* c) {
 void Hand::print() const {
 	for (auto c : hand) {
 		c->print();
+	}
+}
+
+//Prints out to an ofstream
+void Hand::print(ofstream& o) {
+	for (auto c : hand) {
+		c->print(o);
 	}
 }
 
