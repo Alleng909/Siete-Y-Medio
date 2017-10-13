@@ -35,7 +35,10 @@ int main() {
 		cout << "You have $" << p->getAmount() << ". Enter bet: ";
 		int bet = maxPayout + startingAmount; //Too high to get without winning, triggering for loop. 
 		while (bet > p->getAmount() || bet <= 0) {
-			cin >> bet;
+			while (!(cin >> bet)) {
+				cin.clear();
+				cin.ignore();
+			}
 			if (bet > p->getAmount() || bet <= 0) {
 				cout << "\nYou have $" << p->getAmount() << " and that is an invalid amount, enter new bet: ";
 			}
